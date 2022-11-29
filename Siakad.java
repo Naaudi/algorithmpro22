@@ -5,12 +5,12 @@ public class Siakad {
     static int jumlahData = 0;
 
     public static void tambahData() {
-        Scanner input = new Scanner(System.in);
         System.out.println("Silahkan tambah data");
+        Scanner scan = new Scanner(System.in);
         System.out.print("NIM = ");
-        String nim = input.nextLine();
+        String nim = scan.nextLine();
         System.out.print("Nama = ");
-        String nama = input.nextLine();
+        String nama = scan.nextLine();
         mahasiswa[jumlahData] = new Mahasiswa();
         mahasiswa[jumlahData].setNim(nim);
         mahasiswa[jumlahData].setNama(nama);
@@ -26,23 +26,52 @@ public class Siakad {
         }
     }
 
+    public static void urutkanData() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Pilih algoritma pengurutan");
+        System.out.println("1. EXCHANGE SORT");
+        System.out.println("Pilih algoritma = ");
+        int algo = scanner.nextInt();
+        switch (algo) {
+            case 1: {
+                exchangeSort();
+                break;
+            }
+        }
+    }
+
+    public static void exchangeSort() {
+        for (int x = 0; x < jumlahData; x++) {
+            for (int y = x + 1; y < jumlahData; y++) {
+                if (mahasiswa[x].getNim().compareTo(mahasiswa[y].getNim()) >= 1) {
+                    Mahasiswa temp = mahasiswa[x];
+                    mahasiswa[x] = mahasiswa[y];
+                    mahasiswa[y] = temp;
+                }
+            }
+        }
+    }
+
     public static void main(String[] args) {
-        Scanner input = new Scanner(System.in);
+        Scanner scan = new Scanner(System.in);
         int menu;
         do {
             System.out.println("Menu Siakad");
             System.out.println("1. Tambah Data");
             System.out.println("2. Lihat Data");
-            System.out.println("3. Keluar");
+            System.out.println("3. Urutkan Data");
+            System.out.println("4. Keluar");
             System.out.print("Pilih menu = ");
-            menu = input.nextInt();
+            menu = scan.nextInt();
 
             if (menu == 1) {
                 tambahData();
             } else if (menu == 2) {
                 tampilData();
+            } else if (menu == 3) {
+                urutkanData();
             }
-        } while (menu != 3);
+        } while (menu != 4);
 
     }
 }
